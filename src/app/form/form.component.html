@@ -19,7 +19,9 @@
     class="error"
     *ngIf="formGroup.get('phone').get('prefix').errors?.maxlength; else error2"
   >
-    Erreur 1
+    L'indicateur ne doit pas dépasser
+    {{ formGroup.get('phone').get('prefix').errors?.maxlength.requiredLength }}
+    caractères
   </span>
   <ng-template #error2>
     <span
@@ -29,7 +31,11 @@
         else error3
       "
     >
-      Erreur 2
+      Le numéro de téléphone ne doit pas dépasser
+      {{
+        formGroup.get('phone').get('number').errors?.maxlength.requiredLength
+      }}
+      caractères
     </span>
   </ng-template>
   <ng-template #error3>
