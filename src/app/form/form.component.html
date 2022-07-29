@@ -15,9 +15,28 @@
     <input formControlName="prefix" placeholder="+33" />
     <input formControlName="number" placeholder="Téléphone" />
   </div>
-  <span class="error" *ngIf="formGroup.get('phone').errors?.required">
-    le numéro de téléphone est requis
+  <span
+    class="error"
+    *ngIf="formGroup.get('phone').get('prefix').errors?.maxlength; else error2"
+  >
+    Erreur 1
   </span>
+  <ng-template #error2>
+    <span
+      class="error"
+      *ngIf="
+        formGroup.get('phone').get('number').errors?.maxlength;
+        else error3
+      "
+    >
+      Erreur 2
+    </span>
+  </ng-template>
+  <ng-template #error3>
+    <span class="error" *ngIf="formGroup.get('phone').errors?.required">
+      le numéro de téléphone est requis
+    </span>
+  </ng-template>
   <input
     formControlName="lead"
     placeholder="Qui que c'est votre lead dev front adoré ?"
